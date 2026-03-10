@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Response 2 — Lily Holic</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Lily Holic</h1>
+        </header>
+
+        <nav class="sidebar" aria-label="Date navigation">
+            <h2>Date</h2>
+
+            <div class="date-nav">
+                <div id="display-date" class="display-date">2004/3/4</div>
+
+                <div class="date-controls">
+                    <button id="prev-day" type="button" aria-label="Previous Day">◀ Previous Day</button>
+                    <button id="next-day" type="button" aria-label="Next Day">Next Day ▶</button>
+                </div>
+            </div>
+
+            <div class="note">
+                Have a problem?<br />
+                Contact manager: lily@phillia.com
+            </div>
+
+            <div class="function">
+                <br />
+                <a class="link" href="digitaldiary.html">Digital Diary</a><br />
+                <a class="link" href="photolibrary.html">Photo Library</a>
+            </div>
+        </nav>
+
+        <main class="content" role="main">
+            <div class="center-wrap">
+                <div class="center-block">
+                    <article class="message">
+                        <div class="meta">《Poster: Philia》Now</div>
+                        <div class="smalltitle">■ Maybe you’re right.</div>
+                        <div class="smallbody">11111</div>
+                    </article>
+
+                    <article class="message">
+                        <div class="meta">《Poster: Never71》00:32</div>
+                        <div class="smalltitle">■ What?</div>
+                        <div class="smallbody">Philia? Since when do you surrender?</div>
+                    </article>
+
+                    <article class="message">
+                        <div class="meta">《Poster: Ao Neko》00:33</div>
+                        <div class="smalltitle">■ Of course I’m right</div>
+                        <div class="smallbody">At least someone here admits it.</div>
+                    </article>
+
+                    <article class="message">
+                        <div class="meta">《Poster: Satie》00:34</div>
+                        <div class="smalltitle">■ This isn’t like you</div>
+                        <div class="smallbody">Philia, don’t dissolve. If you vanish too, this place collapses.</div>
+                    </article>
+
+                    <article class="message">
+                        <div class="meta">《Poster: Philia》Now</div>
+                        <div class="smallbody">
+                            How to response? (click to choose)<br />
+                            <a class="link" href="index.html">■ “I’m tired.”</a><br />
+                            <a class="link" href="index.html">■ “I don’t know what Ether means anymore.”</a><br />
+                            <a class="link" href="index.html">■ (Log out without another word.)</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <footer>© Lily holic — 2004</footer>
+        </main>
+
+        <script>
+            (function () {
+                function initDateControls(root) {
+                    const display = document.getElementById("display-date");
+                    const prevBtn = document.getElementById("prev-day");
+                    const nextBtn = document.getElementById("next-day");
+
+                    if (!display || !prevBtn || !nextBtn) return;
+
+                    let current = new Date(2004, 2, 4);
+
+                    function formatSlash(d) {
+                        return d.getFullYear() + "/" + (d.getMonth() + 1) + "/" + d.getDate();
+                    }
+
+                    function setDate(d) {
+                        current = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+                        display.textContent = formatSlash(current);
+                    }
+
+                    prevBtn.addEventListener("click", function () {
+                        const prev = new Date(current);
+                        prev.setDate(prev.getDate() - 1);
+                        setDate(prev);
+                    });
+
+                    nextBtn.addEventListener("click", function () {
+                        const next = new Date(current);
+                        next.setDate(next.getDate() + 1);
+                        setDate(next);
+                    });
+
+                    setDate(current);
+                }
+
+                if (document.readyState === "loading") {
+                    document.addEventListener("DOMContentLoaded", function () {
+                        initDateControls(document);
+                    });
+                } else {
+                    initDateControls(document);
+                }
+            })();
+        </script>
+    </body>
+</html>

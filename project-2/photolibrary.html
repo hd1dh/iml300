@@ -6,27 +6,26 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
+        <audio autoplay loop src="asset/Salyu.ogg"></audio>
         <header>
             <h1>Photo Library</h1>
         </header>
-        <nav class="sidebar">
-            <h2>Service</h2>
-            <form>
-                <label for="name">Username</label>
-                <input id="name" name="name" type="text" placeholder="enter your username" />
 
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email" placeholder="your@email.com" />
+        <nav class="sidebar" aria-label="Date navigation">
+            <h2>Date</h2>
 
-                <label for="pwd">Password</label>
-                <input id="pwd" name="pwd" type="password" placeholder="******" />
+            <div class="date-nav">
+                <div id="display-date" class="display-date">2004/3/4</div>
 
-                <button type="button">Register/Log in</button>
-            </form>
+                <div class="date-controls">
+                    <button id="prev-day" type="button" aria-label="Previous Day">◀ Previous Day</button>
+                    <button id="next-day" type="button" aria-label="Next Day">Next Day ▶</button>
+                </div>
+            </div>
 
             <div class="note">
-                Meet a problem?<br />
-                Contact manager：lily@Phillia.com
+                Have a problem?<br />
+                Contact manager: lily@phillia.com
             </div>
 
             <div class="function">
