@@ -38,5 +38,40 @@
         </nav>
         <main class="content" role="main"></main>
         <script src="backgroundcircle.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const display = document.getElementById("display-date");
+                const prevBtn = document.getElementById("prev-day");
+                const nextBtn = document.getElementById("next-day");
+
+                let current = new Date(2004, 2, 4);
+
+                function formatSlash(d) {
+                    const y = d.getFullYear();
+                    const m = d.getMonth() + 1;
+                    const day = d.getDate();
+                    return y + "/" + m + "/" + day;
+                }
+
+                function setDate(d) {
+                    current = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+                    display.textContent = formatSlash(current);
+                }
+
+                prevBtn.addEventListener("click", function () {
+                    const prev = new Date(current);
+                    prev.setDate(prev.getDate() - 1);
+                    setDate(prev);
+                });
+
+                nextBtn.addEventListener("click", function () {
+                    const next = new Date(current);
+                    next.setDate(next.getDate() + 1);
+                    setDate(next);
+                });
+
+                setDate(current);
+            });
+        </script>
     </body>
 </html>
