@@ -6,6 +6,15 @@
         <link rel="stylesheet" href="style.css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
+        <style>
+            body,
+            html,
+            * {
+                background-image: none;
+                background: transparent;
+            }
+        </style>
+        <script src="backgroundcircle.js"></script>
     </head>
     <body class="use-p5-bg">
         <audio autoplay loop src="asset/Salyu.ogg"></audio>
@@ -37,7 +46,6 @@
             </div>
         </nav>
         <main class="content" role="main"></main>
-        <script src="backgroundcircle.js"></script>
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const display = document.getElementById("display-date");

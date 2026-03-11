@@ -1,4 +1,3 @@
-//
 let bgImg = null;
 let bgImgLoaded = false;
 let cachedBg = null;
@@ -11,23 +10,57 @@ let tSpeed = 0.5;
 let cellW, cellH;
 let sizeMultiplier = 1.2;
 
+let cnv = null;
+let lastWindowW = 0;
+let lastWindowH = 0;
+let isVisible = true;
+
 function preload() {
-    loadImage("f1.webp", (img) => {
+    loadImage("asset/f1.webp", (img) => {
         bgImg = img;
         bgImgLoaded = true;
     });
 }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    cnv = createCanvas(windowWidth, windowHeight);
+
     pixelDensity(1);
+
+    // 给 canvas 加类，便于 CSS 控制（如 .p5-bg-canvas { position:fixed; inset:0; pointer-events:none; }）
+    if (cnv && cnv.elt) cnv.elt.classList.add("p5-bg-canvas");
+
+    cnv.style("position", "fixed");
+    cnv.style("inset", "0");
+    cnv.style("width", "100vw");
+    cnv.style("height", "100vh");
+    cnv.style("z-index", "-1");
+    cnv.style("pointer-events", "none");
+
     initGrid();
+
     for (let r = 0; r < rows; r++) {
         seeds[r] = [];
         for (let c = 0; c < cols; c++) seeds[r][c] = random(10000);
     }
+
     noStroke();
+
     buildCachedBg();
+
+    if (typeof document !== "undefined") {
+        document.addEventListener("visibilitychange", () => {
+            isVisible = !document.hidden;
+            if (document.hidden) {
+                noLoop();
+            } else {
+                loop();
+            }
+        });
+    }
+
+    lastWindowW = windowWidth;
+    lastWindowH = windowHeight;
 }
 
 function initGrid() {
@@ -36,45 +69,34 @@ function initGrid() {
 }
 
 function buildCachedBg() {
-    if (cachedBg) cachedBg.remove();
-    cachedBg = createGraphics(width, height);
-    cachedBg.pixelDensity(1);
-    if (bgImgLoaded && bgImg) {
-        let sx = width / bgImg.width;
-        let sy = height / bgImg.height;
-        let scale = max(sx, sy);
-        let drawW = bgImg.width * scale;
-        let drawH = bgImg.height * scale;
-        let dx = (width - drawW) / 2;
-        let dy = (height - drawH) / 2;
-        cachedBg.clear();
-        cachedBg.image(bgImg, dx, dy, drawW, drawH);
-    } else {
-        drawPlaceholderToGraphics(cachedBg);
-    }
-}
+    if (!cachedBg || cachedBg.width !== width || cachedBg.height !== height) {
+        if (cachedBg) cachedBg.remove();
+        cachedBg = createGraphics(width, height);
+        cachedBg.pixelDensity(1);
 
-function drawPlaceholderToGraphics(g) {
-    let w = g.width,
-        h = g.height;
-    for (let y = 0; y < h; y++) {
-        let t = map(y, 0, h, 0, 1);
-        g.stroke(lerpColor(color(250, 250, 250), color(210, 220, 240), t));
-        g.line(0, y, w, y);
+        if (bgImgLoaded && bgImg) {
+            let sx = width / bgImg.width;
+            let sy = height / bgImg.height;
+            let scale = max(sx, sy);
+            let drawW = bgImg.width * scale;
+            let drawH = bgImg.height * scale;
+            let dx = (width - drawW) / 2;
+            let dy = (height - drawH) / 2;
+            cachedBg.clear();
+            cachedBg.image(bgImg, dx, dy, drawW, drawH);
+        } else {
+            drawPlaceholderToGraphics(cachedBg);
+        }
     }
-    g.noStroke();
-    g.fill(80);
-    g.textAlign(CENTER, CENTER);
-    g.textSize(min(w, h) * 0.035);
-    g.text("Background image missing: please upload f1.webp", w / 2, h / 2);
 }
 
 function draw() {
-    background(255);
-    if (bgImgLoaded && (!cachedBg || cachedBg.width !== width || cachedBg.height !== height)) {
+    clear();
+
+    if (!cachedBg || cachedBg.width !== width || cachedBg.height !== height) {
         buildCachedBg();
-    }
-    if (bgImgLoaded && cachedBg) {
+    } else if (bgImgLoaded && !cachedBg) {
+        // 保底：若图片加载后 cachedBg 仍为空，重建
         buildCachedBg();
     }
 
@@ -91,12 +113,16 @@ function draw() {
             let n = noise(seeds[r][c], t * 0.8);
             let baseRadius = map(n, 0, 1, minR, maxR);
             let radius = min(baseRadius * sizeMultiplier, maxR);
+
             ctx.save();
             ctx.beginPath();
             ctx.arc(cx, cy, radius, 0, Math.PI * 2);
             ctx.clip();
-            ctx.drawImage(cachedBg.canvas, 0, 0);
+            if (cachedBg && cachedBg.canvas) {
+                ctx.drawImage(cachedBg.canvas, 0, 0);
+            }
             ctx.restore();
+
             push();
             noFill();
             stroke(0, 30);
@@ -110,5 +136,13 @@ function draw() {
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
     initGrid();
+
+    if (cachedBg) {
+        cachedBg.remove();
+        cachedBg = null;
+    }
+
     buildCachedBg();
+    lastWindowW = windowWidth;
+    lastWindowH = windowHeight;
 }
