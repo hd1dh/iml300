@@ -35,6 +35,44 @@ body {
     background-attachment: fixed;
     line-height: 1.4;
 }
+/* ---------- 保持原站点背景：只有当 body 没有 use-p5-bg 类时才显示背景图 ---------- */
+body:not(.use-p5-bg) {
+    /* 把你原来用于站点背景的样式放这儿（复制你现在的那几行） */
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+/* ---------- 当 body 带 use-p5-bg 时，隐藏原背景，显示 p5 canvas ---------- */
+body.use-p5-bg {
+    background: transparent; /* 或者 background-color: rgba(...) */
+}
+
+/* 全屏 canvas 作为背景（仅在带 use-p5-bg 的页面生效） */
+body.use-p5-bg canvas {
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0 */
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 0; /* canvas 在最底层可见 */
+    pointer-events: none; /* 不阻挡页面点击 */
+    display: block;
+}
+
+/* 确保页面内容在 canvas 上方 */
+body.use-p5-bg header,
+body.use-p5-bg .sidebar,
+body.use-p5-bg .content {
+    position: relative; /* 保留已有 position 的元素无需改动 */
+    z-index: 1;
+}
+
+/* header 通常应更高，避免被 sidebar 覆盖 */
+body.use-p5-bg header {
+    z-index: 2;
+}
 
 a {
     color: inherit;
