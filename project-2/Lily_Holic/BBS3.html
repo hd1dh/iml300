@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Lily Holic</title>
+        <link rel="stylesheet" href="homestyle.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Victor+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+            rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet" />
+    </head>
+    <body class="bbs2">
+        <nav>
+            <a href="home.html">Home</a>
+            <a href="photo_library.html">Photo Library</a>
+            <a href="AboutLily.html">About Lily</a>
+        </nav>
+
+        <main class="forum">
+            <video src="photo/red.mp4" autoplay loop muted playsinline></video>
+            <div class="entries">
+                <div class="entry">
+                    <h2 class="ltitle">
+                        1999. <br />I was thirteen. <br />If I had to give it a color, it was
+                        <a href="BBS4.html" class="next1">rose-tinted.</a> But now, everything feels gray.
+                    </h2>
+                </div>
+            </div>
+        </main>
+        <script>
+            const entries = document.querySelectorAll(".entry");
+            let entryIndex = 0;
+
+            function typeEntry(entry, callback) {
+                const nodes = [];
+                entry.querySelectorAll("p, h2").forEach((el) => {
+                    nodes.push(el);
+                });
+
+                entry.style.opacity = 1;
+                let nodeIndex = 0;
+
+                function typeNode() {
+                    if (nodeIndex >= nodes.length) {
+                        setTimeout(callback, 50);
+                        return;
+                    }
+                    const el = nodes[nodeIndex];
+                    const text = el.innerHTML;
+                    el.innerHTML = "";
+                    el.style.visibility = "visible";
+                    let i = 0;
+
+                    const interval = setInterval(() => {
+                        el.innerHTML = text.slice(0, i);
+                        i++;
+                        if (i > text.length) {
+                            clearInterval(interval);
+                            nodeIndex++;
+                            typeNode();
+                        }
+                    }, 10);
+                }
+                typeNode();
+            }
+
+            function nextEntry() {
+                if (entryIndex >= entries.length) return;
+                const entry = entries[entryIndex];
+                entryIndex++;
+                typeEntry(entry, nextEntry);
+            }
+
+            entries.forEach((entry) => {
+                entry.style.opacity = 0;
+                entry.querySelectorAll("p, h2").forEach((el) => {
+                    el.style.visibility = "hidden";
+                });
+            });
+
+            setTimeout(nextEntry, 2500);
+        </script>
+    </body>
+</html>
