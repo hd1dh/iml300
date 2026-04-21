@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>whenwe.love/moving/pigeon.html</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+                /* macOS Sonoma-style desktop wallpaper gradient */
+                background: url("assets/sky.jpg") center/cover no-repeat;
+                font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            }
+
+            #stage {
+                position: fixed;
+                inset: 0;
+                z-index: 1;
+            }
+
+            /* ── Apple macOS window chrome ── */
+            .mac-window {
+                position: absolute;
+                border-radius: 10px;
+                overflow: hidden;
+                /* macOS window shadow */
+                box-shadow:
+                    0 0 0 0.5px rgba(0, 0, 0, 0.25),
+                    0 2px 6px rgba(0, 0, 0, 0.12),
+                    0 8px 24px rgba(0, 0, 0, 0.18),
+                    0 20px 50px rgba(0, 0, 0, 0.14);
+                will-change: transform, opacity;
+            }
+
+            .mac-titlebar {
+                height: 28px;
+                /* macOS Ventura/Sonoma titlebar */
+                background: linear-gradient(180deg, #ececec 0%, #e0e0e0 100%);
+                border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                display: flex;
+                align-items: center;
+                padding: 0 8px;
+                gap: 6px;
+                position: relative;
+                user-select: none;
+                cursor: default;
+            }
+
+            .mac-btn {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                flex-shrink: 0;
+                position: relative;
+            }
+            .mac-btn.close {
+                background: #ff5f57;
+                box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
+            }
+            .mac-btn.minimize {
+                background: #febc2e;
+                box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+            }
+            .mac-btn.maximize {
+                background: #28c840;
+                box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.12);
+            }
+
+            .mac-title {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 11px;
+                color: #3a3a3a;
+                font-weight: 500;
+                white-space: nowrap;
+                letter-spacing: -0.01em;
+            }
+
+            .mac-content {
+                display: block;
+                overflow: hidden;
+                background: #f0f0f0;
+                line-height: 0;
+            }
+            /* ─────────────────────────────────────────────
+
+            ───────────────────────────────────────────── */
+            .mac-content img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                /* no animation — purely static once rendered */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="stage"></div>
+        <script>
+            var PIGEON_FRAMES = [
+                /* frame 01 */ "assets/1.png",
+                /* frame 02 */ "assets/2.png",
+                /* frame 03 */ "assets/3.png",
+                /* frame 04 */ "assets/4.png",
+                /* frame 05 */ "assets/5.png",
+                /* frame 06 */ "assets/6.png",
+                /* frame 07 */ "assets/7.png",
+                /* frame 08 */ "assets/8.png",
+                /* frame 09 */ "assets/9.png",
+                /* frame 10 */ "assets/10.png",
+                /* frame 11 */ "assets/11.png",
+                /* frame 12 */ "assets/12.png",
+                /* frame 13 */ "assets/13.png",
+                /* frame 14 */ "assets/14.png",
+                /* frame 15 */ "assets/15.png",
+                /* frame 16 */ "assets/16.png"
+            ];
+
+            var FRAME_COUNT = PIGEON_FRAMES.length;
+
+            // Window dimensions
+            var WIN_W = 200;
+            var TITLEBAR_H = 28;
+            var CONTENT_H = 140;
+            var WIN_H = TITLEBAR_H + CONTENT_H;
+
+            // ── Seeded RNG ────────────────────────────────────────────────
+            var seed = Date.now() % 999983;
+            function rng() {
+                seed = (seed * 1664525 + 1013904223) & 0xffffffff;
+                return (seed >>> 0) / 0xffffffff;
+            }
+
+            // ── Window spawner ────────────────────────────────────────────
+            var stage = document.getElementById("stage");
+            var INTERVAL_MS = 350;
+
+            // Continuous random walk — initialised after DOM ready so vw/vh are correct
+            var walkX, walkY, walkAngle;
+            var zCounter = 100;
+            var frameIndex = 0;
+            var liveWindows = [];
+
+            function initWalk() {
+                walkX = window.innerWidth * 0.5;
+                walkY = window.innerHeight * 0.5;
+                walkAngle = rng() * Math.PI * 2;
+            }
+
+            function nextPos() {
+                var vw = window.innerWidth,
+                    vh = window.innerHeight;
+                // Safe zone: window must fit fully inside
+                var minX = WIN_W / 2,
+                    maxX = vw - WIN_W / 2;
+                var minY = WIN_H / 2,
+                    maxY = vh - WIN_H / 2;
+
+                var step = Math.min(vw, vh) * 0.1 + rng() * Math.min(vw, vh) * 0.01;
+
+                // Drift angle gently
+                walkAngle += (rng() - 0.5) * 1.0;
+
+                // Look-ahead: if next step would leave safe zone, reflect angle
+                var nx = walkX + Math.cos(walkAngle) * step;
+                var ny = walkY + Math.sin(walkAngle) * step;
+                if (nx < minX || nx > maxX) walkAngle = Math.PI - walkAngle;
+                if (ny < minY || ny > maxY) walkAngle = -walkAngle;
+
+                // Apply step with fresh angle after reflection
+                walkX += Math.cos(walkAngle) * step;
+                walkY += Math.sin(walkAngle) * step;
+
+                // Safety clamp (should rarely trigger after reflection)
+                walkX = Math.max(minX, Math.min(maxX, walkX));
+                walkY = Math.max(minY, Math.min(maxY, walkY));
+
+                return {
+                    x: Math.round(walkX - WIN_W / 2),
+                    y: Math.round(walkY - WIN_H / 2),
+                    rot: (rng() - 0.5) * 1.2
+                };
+            }
+
+            function spawnWindow() {
+                // Fade out oldest windows after too many accumulate
+                if (liveWindows.length > 40) {
+                    var old = liveWindows.splice(0, 8);
+                    old.forEach(function (w) {
+                        w.style.transition = "opacity 0.28s ease";
+                        w.style.opacity = "0";
+                        setTimeout(function () {
+                            if (w.parentNode) w.parentNode.removeChild(w);
+                        }, 320);
+                    });
+                }
+
+                var pos = nextPos();
+                var f = frameIndex % FRAME_COUNT;
+                var frameNum = String(f + 1).padStart(2, "0");
+
+                var win = document.createElement("div");
+                win.className = "mac-window";
+
+                // Start invisible + slightly scaled down; animate into place
+                win.style.cssText =
+                    "width:" +
+                    WIN_W +
+                    "px;" +
+                    "left:" +
+                    pos.x +
+                    "px;" +
+                    "top:" +
+                    pos.y +
+                    "px;" +
+                    "transform:rotate(" +
+                    pos.rot +
+                    "deg) scale(0.82);" +
+                    "opacity:0;" +
+                    "z-index:" +
+                    ++zCounter +
+                    ";";
+
+                var imgSrc = PIGEON_FRAMES[f] || "";
+
+                win.innerHTML =
+                    '<div class="mac-titlebar">' +
+                    '<div class="mac-btn close"></div>' +
+                    '<div class="mac-btn minimize"></div>' +
+                    '<div class="mac-btn maximize"></div>' +
+                    '<span class="mac-title">pigeon_' +
+                    frameNum +
+                    ".html</span>" +
+                    "</div>" +
+                    '<div class="mac-content" style="width:' +
+                    WIN_W +
+                    "px;height:" +
+                    CONTENT_H +
+                    'px;">' +
+                    '<img src="' +
+                    imgSrc +
+                    '" alt="pigeon frame ' +
+                    frameNum +
+                    '">' +
+                    "</div>";
+
+                stage.appendChild(win);
+                liveWindows.push(win);
+
+                // Pop-in animation — window appears once and stays static forever after
+                requestAnimationFrame(function () {
+                    win.style.transition = "opacity 0.14s ease, transform 0.22s cubic-bezier(0.34,1.4,0.64,1)";
+                    requestAnimationFrame(function () {
+                        win.style.opacity = "1";
+                        win.style.transform = "rotate(" + pos.rot + "deg) scale(1)";
+                    });
+                });
+
+                frameIndex++;
+            }
+
+            // Init walk position after page load so vw/vh are reliable
+            window.addEventListener("load", function () {
+                initWalk();
+                setInterval(spawnWindow, INTERVAL_MS);
+            });
+
+            // ── Draggable by titlebar ─────────────────────────────────────
+            stage.addEventListener("mousedown", function (e) {
+                var win = e.target.closest(".mac-window");
+                if (!win || !e.target.closest(".mac-titlebar")) return;
+                var rect = win.getBoundingClientRect();
+                var ox = e.clientX - rect.left,
+                    oy = e.clientY - rect.top;
+                win.style.zIndex = 99999;
+                win.style.transition = "none";
+                function onMove(e) {
+                    win.style.left = e.clientX - ox + "px";
+                    win.style.top = e.clientY - oy + "px";
+                }
+                function onUp() {
+                    document.removeEventListener("mousemove", onMove);
+                    document.removeEventListener("mouseup", onUp);
+                }
+                document.addEventListener("mousemove", onMove);
+                document.addEventListener("mouseup", onUp);
+            });
+        </script>
+    </body>
+</html>
