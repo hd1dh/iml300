@@ -26,53 +26,53 @@ const terms = [
 ];
 
 const contents = [
-    "Start of Spring: This marks the end of winter and the arrival of spring, when temperatures rise and all things come back to life.",
+    "the Beginning of Spring: This marks the end of winter and the arrival of spring, when temperatures rise and all things come back to life.",
 
     "Rain Water: As temperatures warm, ice and snow melt, and rainfall increases, this solar term is named “Rain Water.”",
 
-    "Start of Insects Awakening: The character “zhe” originally means “to hide,” and animals hibernating are said to “enter hibernation.” The ancients believed that hibernating insects were awakened by spring thunder, hence the name “Start of Insects Awakening.”",
+    "the Waking of Insects: The character “zhe” originally means “to hide,” and animals hibernating are said to “enter hibernation.” The ancients believed that hibernating insects were awakened by spring thunder, hence the name.",
 
-    "Spring Equinox: This day falls exactly halfway through the 90 days of spring, hence the name “Spring Equinox.” Day and night are of equal length, and the balance between cold and warmth is restored; some overwintering crops begin their spring growth phase.",
+    "the Spring Equinox: This day falls exactly halfway through the 90 days of spring. Day and night are of equal length, and balance is restored.",
 
-    "Qingming: This term conveys the meaning of clear weather and the sprouting of plants. As temperatures gradually rise, plants begin to sprout, the earth turns green again, and it is an ideal time for spring plowing and planting.",
+    "Pure Brightness: This term conveys clear weather and sprouting plants. It is ideal for spring plowing and planting.",
 
-    "Guyu: As rainfall increases, it nourishes the fields and promotes the growth of crops, giving rise to the saying, “Rain gives birth to a hundred grains.”",
+    "Grain Rain: Rainfall increases and nourishes crops, giving rise to the saying “Rain gives birth to a hundred grains.”",
 
-    "Start of Summer: This marks the beginning of summer and is seen as the start of rising temperatures. At this time, all things grow vigorously and flourish.",
+    "the Beginning of Summer: This marks the start of summer, when all things grow vigorously.",
 
-    "Grain Buds: This term refers to the stage when the seeds of summer crops have begun to fill out but are not yet fully mature, hence the name “Grain Buds.”",
+    "Lesser Fullness of Grain: Seeds begin to fill but are not fully mature.",
 
-    "Grain in Ear: “Mang” refers to the needle-like projections on the husks of certain grass family plants. Grain in Ear signifies that crops with awns, such as wheat, are nearing maturity and can be harvested for seed, also heralding the start of farmers’ busy fieldwork.",
+    "Grain in Beard: Crops like wheat near maturity and can be harvested.",
 
-    "Summer Solstice: This is the day with the longest daylight and shortest night of the year, marking the imminent arrival of the hot summer.",
+    "the Summer Solstice: The longest day and shortest night of the year.",
 
-    "Minor Heat: This marks the beginning of the “Three Fervent Periods” (Sanfu), characterized by hot and muggy weather. Although temperatures are high, this is not yet the hottest time of the year, hence the name “Minor Heat.”",
+    "Lesser Heat: Marks the beginning of hot and humid weather, but not yet the hottest.",
 
-    "Major Heat: This occurs around the middle of the “Three Fervent Periods” and is the hottest time of the year in most parts of China, with the highest temperatures.",
+    "Greater Heat: The hottest time of the year in most regions.",
 
-    "Start of Autumn: This heralds the beginning of autumn, with the weather gradually turning cooler. However, the summer heat has not yet fully dissipated, giving rise to the saying of the “autumn tiger”—a period of lingering heat.",
+    "the Beginning of Autumn: Weather begins to cool, though heat still lingers.",
 
-    "End of Summer: This signifies the end of the hot summer days, as the weather transitions from sweltering heat to coolness.",
+    "the End of Heat: The transition from hot summer to cooler weather.",
 
-    "White Dew: As the temperature difference between day and night widens, moisture condenses into white dewdrops on plants and trees, hence the name “White Dew.”",
+    "White Dew: Moisture condenses into dew as temperature differences increase.",
 
-    "Autumnal Equinox: Similar to the Vernal Equinox, day and night are nearly equal in length, marking the midpoint of autumn.",
+    "the Autumn Equinox: Day and night are nearly equal, marking mid-autumn.",
 
-    "Cold Dew: As cold air grows stronger and the rainy season ends, temperatures shift from cool to cold, and dew begins to form. In the mornings and at night, the ground cools and dew condenses.",
+    "Cold Dew: Temperatures drop and dew begins to form.",
 
-    "Frost’s Descent: This solar term marks the transition from autumn to winter, with the first frosts beginning to appear.",
+    "Frost's Descent: Marks the transition to winter with first frosts.",
 
-    "Start of Winter: This marks the beginning of winter. Fieldwork comes to an end, and crops are harvested and stored.",
+    "the Beginning of Winter: Fieldwork ends and harvests are stored.",
 
-    "Minor Snow: The landscape takes on an early winter appearance, though heavy snowfall has not yet begun.",
+    "Lesser Snow: Early winter appearance without heavy snowfall.",
 
-    "Major Snow: The weather is quite cold at this time; not only does the amount of snowfall increase, but the area covered by snow also expands.",
+    "Greater Snow: Snowfall increases and spreads widely.",
 
-    "Winter Solstice: In contrast to the Summer Solstice, this is the day with the shortest daylight and the longest night. It marks the start of the “Nine-Nine Countdown”; after the Winter Solstice, daylight begins to lengthen day by day.",
+    "the Winter Solstice: The shortest day and longest night; daylight begins increasing.",
 
-    "Minor Cold: This period falls around the “Third Nine” of the countdown. Most regions experience freezing temperatures, though the cold has not yet reached its peak.",
+    "Lesser Cold: Cold intensifies but is not yet at its peak.",
 
-    "Major Cold: This is the coldest period of the year, signifying an intensification of the severe cold compared to Minor Cold."
+    "Greater Cold: The coldest period of the year."
 ];
 
 const circle = $("#circle");

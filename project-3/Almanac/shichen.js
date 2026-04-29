@@ -1,4 +1,17 @@
-const terms = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+const terms = [
+    "子zi",
+    "丑chou",
+    "寅yin",
+    "卯mao",
+    "辰chen",
+    "巳si",
+    "午wu",
+    "未wei",
+    "申shen",
+    "酉you",
+    "戌xu",
+    "亥hai"
+];
 
 const contents = [
     "【Zi Hour】Midnight, also known as the dead of night or the middle of the night: the first of the twelve traditional Chinese hours. (11:00 PM to 1:00 AM).",
