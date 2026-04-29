@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Do's Table</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="table.js" defer></script>
+    </head>
+
+    <body class="grid">
+        <!-- 左侧独立导航块 -->
+        <div class="left-nav-box">
+            <div data-target="ritual">Ritual</div>
+            <div data-target="marriage">Marriage</div>
+            <div data-target="funeral">Funeral</div>
+            <div data-target="construction">Construction</div>
+            <div data-target="business">Business</div>
+            <div data-target="life">Daily Life</div>
+        </div>
+
+        <!-- 表格区域 -->
+        <div class="table-area">
+            <div class="table-title">Explanation of Terms for Daily Auspicious and Inauspicious Activities</div>
+            <table class="custom-table">
+                <tr>
+                    <td colspan="2" class="category" id="ritual">Ritual & Worship</td>
+                </tr>
+
+                <tr>
+                    <td>Ancestral Rites (祭祀)</td>
+                    <td>
+                        Ceremonies held at ancestral halls or temples, including the worship of ancestors and deities.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Prayer for Blessings (祈福)</td>
+                    <td>
+                        Visiting a temple to offer incense, fulfill vows, or pray to deities for blessings; also
+                        includes Taoist ritual ceremonies.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Praying for Offspring (求嗣)</td>
+                    <td>Supplicating deities for descendants (children).</td>
+                </tr>
+                <tr>
+                    <td>Consecration Ceremony (开光)</td>
+                    <td>The ritual of enshrining and consecrating a newly crafted statue of a Buddha or deity.</td>
+                </tr>
+                <tr>
+                    <td>Sacred Sculpting & Painting (塑绘)</td>
+                    <td>The painting of murals or carving of deity statues and figures in temples.</td>
+                </tr>
+                <tr>
+                    <td>Ritual Ceremony (齐醮)</td>
+                    <td>Setting up a Taoist ritual altar to pray for peace and blessings.</td>
+                </tr>
+                <tr>
+                    <td>Pre-Ceremony Purification (斋醮)</td>
+                    <td>The fasting and purification ritual before a ceremony.</td>
+                </tr>
+                <tr>
+                    <td>Ritual Bathing (沐浴)</td>
+                    <td>Cleansing the body before rituals.</td>
+                </tr>
+                <tr>
+                    <td>Thanksgiving to Deities (酬神)</td>
+                    <td>Fulfilling vows and thanking deities.</td>
+                </tr>
+                <tr>
+                    <td>Temple Construction (造庙)</td>
+                    <td>Building temples or shrines.</td>
+                </tr>
+                <tr>
+                    <td>Kitchen God Worship (祀灶)</td>
+                    <td>Ritual of worshipping the Kitchen God.</td>
+                </tr>
+                <tr>
+                    <td>Incense Burning (焚香)</td>
+                    <td>Burning incense sticks.</td>
+                </tr>
+                <tr>
+                    <td>Moving the Sacred Flame (出火)</td>
+                    <td>Relocating a deity's spiritual position.</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="category" id="marriage">Marriage</td>
+                </tr>
+
+                <tr>
+                    <td>Wedding Ceremony (嫁娶)</td>
+                    <td>The formal marriage ceremony.</td>
+                </tr>
+                <tr>
+                    <td>Betrothal & Engagement Gifts (纳采)</td>
+                    <td>Formal engagement process.</td>
+                </tr>
+                <tr>
+                    <td>Exchange of Birth Dates (问名)</td>
+                    <td>Families exchange birth data to approve marriage.</td>
+                </tr>
+                <tr>
+                    <td>Groom Marrying into Bride's Family (纳婿)</td>
+                    <td>Groom moves into bride's household.</td>
+                </tr>
+                <tr>
+                    <td>Bride's First Return Home (归宁)</td>
+                    <td>Newlyweds visit bride's parents.</td>
+                </tr>
+                <tr>
+                    <td>Setting Up the Marriage Bed (安床)</td>
+                    <td>Preparing wedding bed.</td>
+                </tr>
+                <tr>
+                    <td>Hanging the Bed Curtain (合帐)</td>
+                    <td>Installing bed curtains.</td>
+                </tr>
+                <tr>
+                    <td>Coming-of-Age Ceremony (冠笄)</td>
+                    <td>Marks adulthood.</td>
+                </tr>
+                <tr>
+                    <td>Engagement Ceremony (订盟)</td>
+                    <td>Formal engagement ritual.</td>
+                </tr>
+                <tr>
+                    <td>Adoption (进人口)</td>
+                    <td>Accepting adopted child.</td>
+                </tr>
+                <tr>
+                    <td>Cutting Wedding Garments (裁衣)</td>
+                    <td>Preparing wedding clothing.</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="category" id="funeral">Funerary Rites</td>
+                </tr>
+
+                <tr>
+                    <td>Tomb Repair (修墓)</td>
+                    <td>Maintenance of graves.</td>
+                </tr>
+                <tr>
+                    <td>Exhumation & Bone Washing (启攒)</td>
+                    <td>Cleansing remains.</td>
+                </tr>
+                <tr>
+                    <td>Breaking Ground for Burial (破土)</td>
+                    <td>Preparing burial ground.</td>
+                </tr>
+                <tr>
+                    <td>Burial Ceremony (安葬)</td>
+                    <td>Funeral service.</td>
+                </tr>
+                <tr>
+                    <td>Erecting a Tombstone (立碑)</td>
+                    <td>Installing gravestone.</td>
+                </tr>
+                <tr>
+                    <td>Donning Mourning Garments (成服)</td>
+                    <td>Wearing mourning clothes.</td>
+                </tr>
+                <tr>
+                    <td>Removing Mourning Garments (除服)</td>
+                    <td>End of mourning period.</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="category" id="construction">Construction</td>
+                </tr>
+
+                <tr>
+                    <td>Moving into a New Home (入宅)</td>
+                    <td>Housewarming ceremony.</td>
+                </tr>
+                <tr>
+                    <td>Breaking Ground (起基动土)</td>
+                    <td>Start of construction.</td>
+                </tr>
+                <tr>
+                    <td>Ridge Beam Installation (上梁)</td>
+                    <td>Installing roof beam.</td>
+                </tr>
+                <tr>
+                    <td>Demolition (拆卸)</td>
+                    <td>Tearing down buildings.</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="category" id="business">Commerce & Business</td>
+                </tr>
+
+                <tr>
+                    <td>Grand Opening (开市)</td>
+                    <td>Opening a business.</td>
+                </tr>
+                <tr>
+                    <td>Signing Contracts (立券交易)</td>
+                    <td>Formal agreements.</td>
+                </tr>
+                <tr>
+                    <td>Receiving Wealth (纳财)</td>
+                    <td>Collecting assets.</td>
+                </tr>
+                <tr>
+                    <td>Seeking Wealth (求财)</td>
+                    <td>Pursuing profit.</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="category" id="life">Daily Life</td>
+                </tr>
+
+                <tr>
+                    <td>Travel (出行)</td>
+                    <td>Journey and outings.</td>
+                </tr>
+                <tr>
+                    <td>Moving Home (移徙)</td>
+                    <td>Relocation.</td>
+                </tr>
+                <tr>
+                    <td>Planting (栽种)</td>
+                    <td>Growing crops.</td>
+                </tr>
+                <tr>
+                    <td>Gathering (会友)</td>
+                    <td>Meeting friends.</td>
+                </tr>
+                <tr>
+                    <td>Taking Office (赴任)</td>
+                    <td>Starting official duty.</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 你原本右侧nav（保留） -->
+        <div class="side-nav">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="create.html">Create</a>
+        </div>
+    </body>
+</html>

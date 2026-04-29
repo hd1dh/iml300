@@ -54,3 +54,18 @@ input[type="submit"] {
   backdrop-filter: blur(6px);
   will-change: left, top;
 }
+
+.card {
+    display: flex;
+    border: 2px solid black;
+    margin: 10px;
+}
+
+.left, .right {
+    flex: 1;
+    padding: 10px;
+}
+
+.left {
+    border-right: 2px solid black;
+}
