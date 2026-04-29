@@ -4,6 +4,9 @@
     padding: 0;
 }
 
+body {
+    font-family: "Times New Roman", "Songti SC", "SimSun", serif;
+}
 a {
     text-decoration: none;
     color: black;
