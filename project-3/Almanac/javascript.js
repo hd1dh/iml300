@@ -1,4 +1,3 @@
-// Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyCywtkCOa9IoMQHFuMt0HYQCblON92dfcg",
     authDomain: "iml300-firebase-demo-2046d.firebaseapp.com",
@@ -9,19 +8,15 @@ const firebaseConfig = {
     appId: "1:114164794723:web:4ba8370bf83e05a808ff56"
 };
 
-// 初始化
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// 👉 和 demo 一样：一个路径
 let dbRef = db.ref("text");
 
-// 👉 获取元素
 const input = document.getElementById("input-yi");
 const submitBtn = document.getElementById("submit-btn");
 const grid = document.getElementById("background-grid");
 
-// 👉 点击提交（和 demo 一样）
 submitBtn.addEventListener("click", function (e) {
     e.preventDefault();
 
@@ -29,7 +24,6 @@ submitBtn.addEventListener("click", function (e) {
 
     if (!text.trim()) return;
 
-    // 👉 demo 核心写法
     const newKey = dbRef.push().key;
 
     const updates = {};
@@ -37,11 +31,9 @@ submitBtn.addEventListener("click", function (e) {
 
     dbRef.update(updates);
 
-    // 清空输入
     input.value = "";
 });
 
-// 👉 监听数据（demo核心）
 dbRef.on("child_added", function (snapshot) {
     const value = snapshot.val();
 
@@ -49,7 +41,7 @@ dbRef.on("child_added", function (snapshot) {
 });
 
 function createCard(text) {
-    console.log("creating card:", text); // 👈 调试
+    console.log("creating card:", text);
 
     const card = document.createElement("div");
     card.className = "gridcard";

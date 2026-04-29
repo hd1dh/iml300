@@ -80,7 +80,6 @@ const circle = $("#circle");
 let rotation = 0;
 const radius = 220;
 
-// 创建圆
 terms.forEach((term, i) => {
     const angle = (360 / terms.length) * i;
 
@@ -91,11 +90,10 @@ terms.forEach((term, i) => {
     circle.append(item);
 });
 
-// 滚轮控制旋转
 $(window).on("wheel", function (e) {
     const delta = e.originalEvent.deltaY;
 
-    rotation += delta * 0.2; // 控制旋转速度
+    rotation += delta * 0.2;
 
     $(".item").each(function (i) {
         const baseAngle = (360 / terms.length) * i;
