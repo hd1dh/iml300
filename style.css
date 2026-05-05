@@ -119,10 +119,8 @@ a:hover {
 .exercise-card::after {
     bottom: 0;
 }
-
-.entry:hover,
-.exercise-card:hover {
-    transform: scale(1.02);
+.entry-title:hover {
+    text-decoration: underline;
 }
 
 .entry {
