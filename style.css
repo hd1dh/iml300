@@ -81,7 +81,7 @@ a {
 }
 
 a:hover {
-    opacity: 1;
+    opacity: 0.9;
 }
 
 .entry,
@@ -93,18 +93,13 @@ a:hover {
     color: #fff;
     padding: 18px;
     background: rgba(1, 44, 205, 0.5);
-    cursor: pointer;
     transition:
         transform 0.28s ease,
-        box-shadow 0.28s ease,
-        filter 0.28s ease;
-    overflow: visible;
+        box-shadow 0.28s ease;
 }
 
 .entry::before,
 .entry::after,
-.bar-item::before,
-.bar-item::after,
 .exercise-card::before,
 .exercise-card::after {
     content: "";
@@ -112,79 +107,28 @@ a:hover {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.96), transparent);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.82);
-    pointer-events: none;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.9), transparent);
 }
 
 .entry::before,
-.bar-item::before,
 .exercise-card::before {
     top: 0;
 }
 
 .entry::after,
-.bar-item::after,
 .exercise-card::after {
     bottom: 0;
 }
 
 .entry:hover,
-.entry:focus-visible,
-.bar-item:hover,
-.bar-item:focus-visible,
-.exercise-card:hover,
-.exercise-card:focus-within {
+.exercise-card:hover {
     transform: scale(1.02);
-    box-shadow:
-        inset 0 12px 18px rgba(255, 255, 255, 0.55),
-        inset 0 -12px 18px rgba(255, 255, 255, 0.55);
-    filter: brightness(1.04);
-}
-
-.project-entry:hover,
-.project-entry:focus-visible {
-    transform: none;
-    box-shadow: none;
-    filter: none;
-}
-
-.entry:hover::before,
-.entry:hover::after,
-.entry:focus-visible::before,
-.entry:focus-visible::after,
-.bar-item:hover::before,
-.bar-item:hover::after,
-.bar-item:focus-visible::before,
-.bar-item:focus-visible::after,
-.exercise-card:hover::before,
-.exercise-card:hover::after,
-.exercise-card:focus-within::before,
-.exercise-card:focus-within::after {
-    box-shadow: 0 0 14px rgba(255, 255, 255, 1);
 }
 
 .entry {
     display: grid;
-    grid-template-columns: minmax(220px, 1fr) minmax(0, 1.4fr);
+    grid-template-columns: 1fr 1.4fr;
     gap: 24px;
-    align-items: start;
-}
-
-.entry-left {
-    grid-column: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.entry-description {
-    grid-column: 2;
-    color: rgba(255, 255, 255, 0.95);
-    line-height: 1.8;
-    text-align: right;
-    justify-self: end;
-    align-self: start;
 }
 
 .entry-left {
@@ -195,19 +139,11 @@ a:hover {
 
 .entry-title {
     font-size: 24px;
-    color: #fff;
-}
-
-.entry-meta {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1rem;
-    line-height: 1.5;
 }
 
 .entry-description {
-    color: rgba(255, 255, 255, 0.95);
-    line-height: 1.8;
     text-align: right;
+    line-height: 1.8;
 }
 
 .exercise-grid {
@@ -227,20 +163,11 @@ footer {
     text-align: center;
 }
 
-.entry-title:hover,
-.title-link:hover,
-.entry:hover .entry-title,
-.exercise-card:hover .entry-title {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
 .p5-frame {
     width: 100%;
     display: block;
     border: 1px solid rgba(255, 255, 255, 0.3);
     background: rgba(255, 255, 255, 0.05);
-    pointer-events: none;
 }
 
 .frame-4x3 {
@@ -255,6 +182,11 @@ footer {
 
 .entry-embed .p5-frame {
     grid-column: 1 / -1;
+}
+
+.entry-embed,
+.exercise-card {
+    overflow: visible;
 }
 
 @media (max-width: 768px) {

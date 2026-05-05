@@ -1,14 +1,5 @@
-// script.js
 document.addEventListener("DOMContentLoaded", () => {
-  const fonts = [
-    "Bitcount Prop Double Ink",
-    "Festive",
-    "Fontdiner Swanky",
-    "Henny Penny",
-    "Knewave",
-    "Lavishly Yours",
-    "Passions Conflict"
-  ];
+  const fonts = ["Festive", "Fontdiner Swanky", "Henny Penny", "Knewave", "Lavishly Yours", "Passions Conflict"];
 
   const targets = document.querySelectorAll("[data-random-font]");
 
